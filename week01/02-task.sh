@@ -1,5 +1,4 @@
 #!/bin/bash
-
 DIRPATH=$1
 
 function count_files_dir {

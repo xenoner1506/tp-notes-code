@@ -1,3 +1,4 @@
+#!/bin/bash
 EXECUTABLE=$1
 ARGS=$@
  

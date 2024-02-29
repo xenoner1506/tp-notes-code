@@ -1,3 +1,4 @@
+#!/bin/bash
 options=$(getopt -o "" -l "dir_path:,start_point:" -- "$@")
 if [ $? -ne 0 ]
 then

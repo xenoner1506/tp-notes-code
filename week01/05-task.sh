@@ -1,3 +1,4 @@
+#!/bin/bash
 FIRST=$1
 SECOND=$2
 OPERATION=$3
