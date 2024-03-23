@@ -9,3 +9,5 @@ bin/
 .env/
 venv/
 env/
+report/
+.vscode/
