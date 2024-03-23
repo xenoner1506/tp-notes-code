@@ -11,3 +11,4 @@ venv/
 env/
 report/
 .vscode/
+external/
