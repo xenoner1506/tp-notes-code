@@ -5,6 +5,6 @@
 [submodule "week11/04-network/server-client"]
 	path = week11/04-network/server-client
 	url = https://github.com/jl888/tcp-sockets.git
-[submodule "week11/04-network/serer-client"]
-	path = week11/04-network/serer-client
+[submodule "week11/04-network/server-client"]
+	path = week11/04-network/server-client
 	url = https://github.com/jl888/tcp-sockets.git
