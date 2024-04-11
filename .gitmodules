@@ -1,3 +1,10 @@
 [submodule "week09/02-observer/CppObserverAsync"]
 	path = week09/02-observer/CppObserverAsync
 	url = https://github.com/alext234/CppObserverAsync.git
+
+[submodule "week11/04-network/server-client"]
+	path = week11/04-network/server-client
+	url = https://github.com/jl888/tcp-sockets.git
+[submodule "week11/04-network/serer-client"]
+	path = week11/04-network/serer-client
+	url = https://github.com/jl888/tcp-sockets.git
