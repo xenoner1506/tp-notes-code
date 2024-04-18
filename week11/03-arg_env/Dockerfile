@@ -1,5 +1,7 @@
 FROM ubuntu:22.04
 
+RUN echo $USER
+
 ARG USER=test
 ARG DEBIAN_FRONTEND=noninteractive
 ENV MYVAR value-of-my-var
