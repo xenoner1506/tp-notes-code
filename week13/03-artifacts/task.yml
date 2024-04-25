@@ -1,0 +1,33 @@
+stages:
+  - build
+  - test
+
+build-job:
+  stage: build
+  tags:
+    - gitlab-build
+    - build
+  script:
+    - echo "Start build job"
+    - build-script.sh
+  artifacts:
+    paths:
+      - build
+
+test-job:
+  stage: test
+  tags:
+    - gitlab-test
+    - test
+  script:
+    - echo "Start test job"
+    - test-script.sh
+  artifacts:
+    paths:
+      - coverage
+      - coverage-html
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH != master # More variables [there](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html)
+      when: manual # always/never

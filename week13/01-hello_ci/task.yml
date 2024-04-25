@@ -1,0 +1,37 @@
+stages:
+  - build
+  - test
+  - delivery
+  - deploy
+
+build-job:
+  stage: build
+  script:
+    - echo "Start build job"
+    - build-script.sh
+
+test-job:
+  stage: test
+  script:
+    - >
+      echo "Start test job"
+
+      test-script.sh
+
+delivery-job:
+  stage: delivery
+  before_scipt:
+    - echo "Some commands before main part"
+  script:
+    - |
+      echo "Start delivery job"
+      delivery-script.sh
+  after_scipt:
+    - echo "Some commands after main part"
+    - echo "It always will be running"
+
+deploy-job:
+  stage: deploy
+  script:
+    - echo "Start deploy job"
+    - deploy-script.sh

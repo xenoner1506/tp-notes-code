@@ -5,6 +5,11 @@
 [submodule "week11/04-network/server-client"]
 	path = week11/04-network/server-client
 	url = https://github.com/jl888/tcp-sockets.git
+
 [submodule "week11/04-network/server-client"]
 	path = week11/04-network/server-client
 	url = https://github.com/jl888/tcp-sockets.git
+
+[submodule "week13/00-base"]
+	path = week13/00-base
+	url = https://gitlab.com/xenoner/ci-example

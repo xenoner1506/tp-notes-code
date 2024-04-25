@@ -1,0 +1,38 @@
+stages:
+  - build
+  - test
+
+build-job:
+  stage: build
+  tags:
+    - gitlab-build
+    - build
+  script:
+    - echo "Start build job"
+    - build-script.sh
+  artifacts:
+    paths:
+      - build
+
+test-transformations:
+  stage: test
+  tags: &tags-test
+    - gitlab-test
+    - test
+  script:
+    - echo "Start test job"
+    - test-transformations.sh
+  artifacts: &artifacts-test
+    paths:
+      - coverage
+      - coverage-html
+
+test-core:
+  stage: test
+  tags:
+    - *tags-test
+  script:
+    - echo "Start test job"
+    - test-core.sh
+  artifacts:
+    <<: *artifacts-test
