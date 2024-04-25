@@ -1,0 +1,90 @@
+version: '3.6'
+services:
+
+  # GITLAB
+  gitlab-web:
+    image: 'gitlab/gitlab-ce:latest'
+    restart: always
+    container_name: gitlab-web
+    hostname: 'example.gitlab.com'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://example.gitlab.com:8929'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2222
+    ports:
+      - "8929:8929"
+      - "443:443"
+      - "2222:22"
+    volumes:
+      - './gitlab/config:/etc/gitlab'
+      - './gitlab/logs:/var/log/gitlab'
+      - './gitlab/data:/var/opt/gitlab'
+    networks:
+      - gitlab-network
+        #   # RUNNER
+        #   gitlab-runner1:
+        #     image: gitlab/gitlab-runner:alpine
+        #     restart: always
+        #     container_name: gitlab-runner1
+        #     hostname: gitlab-runner1
+        #     depends_on:
+        #       - gitlab-web
+        #     volumes:
+        #       - ./config/gitlab-runner:/etc/gitlab-runner
+        #       - /var/run/docker.sock:/var/run/docker.sock
+        #     networks:
+        #       - gitlab-network
+
+  dind:
+    image: docker:20-dind
+    restart: always
+    privileged: true
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+    command:
+      - --storage-driver=overlay2
+    volumes:
+      - ./data/dind/docker:/var/lib/docker
+    networks:
+      - gitlab-network
+
+  runner:
+    restart: always
+    image: gitlab/gitlab-runner:alpine # registry.gitlab.com/gitlab-org/gitlab-runner:alpine
+    volumes:
+      - ./config/gitlab-runner:/etc/gitlab-runner:z
+      - ./data/runner/cache:/cache ###- /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DOCKER_HOST=tcp://dind:2375
+    networks:
+      - gitlab-network
+
+  register-runner:
+    restart: 'no'
+    image: gitlab/gitlab-runner:alpine # registry.gitlab.com/gitlab-org/gitlab-runner:alpine
+    depends_on:
+      - dind
+    environment:
+      - CI_SERVER_URL=http://example.gitlab.com
+      - REGISTRATION_TOKEN=glrt-q15dpyUpb1Zaqj4XT85h
+    command:
+      - register
+      - --non-interactive
+      - --locked=false
+      - --name=gitlab-runner
+      - --executor=docker
+      - --docker-image=docker:20-dind
+      - --docker-volumes=/var/run/docker.sock:/var/run/docker.sock
+    volumes:
+      - ./config:/etc/gitlab-runner:z
+      - ./data/dind/docker:/var/lib/docker
+    networks:
+      - gitlab-network
+
+networks:
+  gitlab-network:
+    name: gitlab-network
+    driver: bridge
+    # ipam:
+    #   config:
+    #     - subnet: 192.168.0.1/24

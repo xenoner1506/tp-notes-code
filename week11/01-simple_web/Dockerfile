@@ -9,5 +9,8 @@ WORKDIR /app
 RUN pip install -r requirements.txt
 
 EXPOSE 5000
+EXPOSE 5123
+EXPOSE 5124
+EXPOSE 5125
 
 CMD ["python3", "./app.py"]
