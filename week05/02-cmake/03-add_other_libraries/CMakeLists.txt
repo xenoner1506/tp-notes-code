@@ -22,12 +22,6 @@ include_directories(
   ${GLUT_INCLUDE_DIRS}
 )
 
-# set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules/cmake/" ${CMAKE_MODULE_PATH})
-# set(CMAKE_PREFIX_PATH "/tmp/SFML/build/")
-# set(SFML_DIR "/tmp/SFML/build/")
-set(SFML_DIR "/tmp/SFML-2.6.1/lib/cmake/SFML/")
-find_package(SFML REQUIRED system window graphics network audio)
-
 message(INFO:\ ${OpenGLProject_SOURCE_DIR})
 # ^ Log message
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OpenGLProject_SOURCE_DIR}/bin)

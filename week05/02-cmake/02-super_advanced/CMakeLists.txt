@@ -11,7 +11,7 @@ project(BuilderProject)
 message(INFO:\ ${BuilderProject_SOURCE_DIR})
 # ^ Log message
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BuilderProject_SOURCE_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BuilderProject_SOURCE_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BuilderProject_SOURCE_DIR}/lib)
 # ^ Directory where store build of project
 
 add_subdirectory(pattern)
