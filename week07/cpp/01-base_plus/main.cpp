@@ -1,4 +1,5 @@
 #include <iostream>
+#include "MyArray.hpp"
 #include "gtest/gtest.h"
 
 
@@ -31,30 +32,30 @@ TEST(TestCaseName, Subtest_4) {
   ASSERT_EQ(value, 14);
 }
 
-// TEST(MyArray, Sum_1) {
-//   // Arrange
-//   MyArray array = MyArray(12, 0);
-// 
-//   // Act
-//   int expected_sum = 0;
-// 
-//   // Assert
-//   ASSERT_EQ(array.sum(), expected_sum);
-// }
-// 
-// TEST(MyArray, Sum_2) {
-//   // Arrange
-//   MyArray array = MyArray(12, 0);
-//   for (size_t idx = 0; idx != 12; ++idx) {
-//     array[idx] = idx;
-//   }
-// 
-//   // Act
-//   int expected_sum = (0 + 11) * 6;
-// 
-//   // Assert
-//   ASSERT_EQ(array.sum(), expected_sum);
-// }
+TEST(MyArray, Sum_1) {
+  // Arrange
+  MyArray array = MyArray(12, 0);
+
+  // Act
+  int expected_sum = 0;
+
+  // Assert
+  ASSERT_EQ(array.sum(), expected_sum);
+}
+
+TEST(MyArray, Sum_2) {
+  // Arrange
+  MyArray array = MyArray(12, 0);
+  for (size_t idx = 0; idx != 12; ++idx) {
+    array[idx] = idx;
+  }
+
+  // Act
+  int expected_sum = (0 + 11) * 6;
+
+  // Assert
+  ASSERT_EQ(array.sum(), expected_sum);
+}
 
 
 int main(int argc, char **argv) {

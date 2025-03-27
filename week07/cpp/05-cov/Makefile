@@ -7,12 +7,13 @@ all: ProjectMain
 ProjectMain: main.cpp
 	g++ --coverage main.cpp -o ProjectMain ${LDFLAGS} ${CFLAGS} 
 
-run: ProjectMain
+profile-files/ProjectMain-main.gcda: ProjectMain
 	./ProjectMain > /dev/null
 
-docs:
-	lcov -t "my-pretty-report" -o report.info --rc lcov_branch_coverage=1 -c -d .  
-	genhtml --rc lcov_branch_coverage=1 -o report report.info
+docs: profile-files/ProjectMain-main.gcda
+	mkdir -p report
+	lcov -t ${REPORT_NAME} -o report/report.info --rc branch_coverage=1 -c -d .
+	genhtml --rc branch_coverage=1 -o report report/report.info
 
-clear:
-	rm -r ProjectMain report main.gcda main.gcno report.info
+clean:
+	rm -r ProjectMain report *.gcda *.gcno

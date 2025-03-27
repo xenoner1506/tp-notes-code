@@ -21,5 +21,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${Test_02_SOURCE_DIR}/bin)
 
 add_executable(Test_02 main.cpp ${SOURCES})
 
-add_executable(Test_02_fixture tests/main.cpp tests/TestWithFixtures.cpp ${SOURCES})
-target_link_libraries(Test_02_fixture ${GTEST_LIBRARIES} Threads::Threads)
+add_executable(Test_02_fixture tests/TestWithFixtures.cpp ${SOURCES})
+target_link_libraries(Test_02_fixture ${GTEST_BOTH_LIBRARIES} Threads::Threads)
