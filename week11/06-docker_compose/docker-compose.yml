@@ -1,40 +1,7 @@
-version: '3.6'
 services:
-  gitlab:
-    image: gitlab/gitlab-ee:16.9.3-ee.0
-    container_name: gitlab
-    restart: always
-    hostname: 'gitlab.example.com'
-    # network_mode: "host"
-    environment:
-      GITLAB_OMNIBUS_CONFIG: |
-        # Add any other gitlab.rb configuration here, each on its own line
-        external_url 'http://gitlab.example.com:8929'
-        gitlab_rails['gitlab_shell_ssh_port'] = 2424
+  web:
+    build: .
     ports:
-      - '0.0.0.0:8929:8929'
-      - '0.0.0.0:443:443'
-      - '0.0.0.0:2424:2424'
-    volumes:
-      - './config:/etc/gitlab'
-      - './data:/var/opt/gitlab'
-      - './logs:/var/log/gitlab'
-    shm_size: '4gb'
-    networks:
-      - gitlab_net
-
-  gitlab-runner:
-    image: gitlab/gitlab-runner:alpine3.19
-    depends_on:
-      - gitlab
-    container_name: gitlab-runner
-    restart: unless-stopped
-    volumes:
-      - ./config-runner/:/etc/gitlab-runner/
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - gitlab_net
-
-networks:
-  gitlab_net:
-    driver: bridge
+      - "8000:5000"
+  redis:
+    image: "redis:alpine"
