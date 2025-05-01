@@ -1,0 +1,4 @@
+---
+- name: Ping servers
+  ansible.builtin.ping:
+  tags: ping

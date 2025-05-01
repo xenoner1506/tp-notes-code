@@ -1,0 +1,9 @@
+---
+- name: Install lazygit
+  ansible.builtin.apt:
+    state: present
+    name: lazygit
+    update_cache: true
+  tags: [common, lazygit]
+
+

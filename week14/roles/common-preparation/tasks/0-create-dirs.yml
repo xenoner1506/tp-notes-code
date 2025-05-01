@@ -1,0 +1,8 @@
+---
+- name: Create necessary directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+  loop: [/cvmfs, /common_soft]
+  tags: [common, directory]
+

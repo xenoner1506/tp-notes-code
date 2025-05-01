@@ -1,0 +1,47 @@
+---
+- name: Get user primary group
+  ansible.builtin.shell: "id -gn {{ user }}"
+  register: primary_group
+  loop: "{{ usernames }}"
+  loop_control: &loop_control_cfg
+    loop_var: user
+    index_var: index
+  tags: [user]
+
+- name: Display output
+  ansible.builtin.debug:
+    var: "primary_group.results[{{ index }}].stdout"
+  loop: "{{ usernames }}"
+  loop_control:
+    <<: *loop_control_cfg
+  tags: [user, debug]
+
+- name: Create directory
+  ansible.builtin.file:
+    path: "/home/{{ item.0 }}"
+    state: directory
+    mode: 0755
+    owner: "{{ item.0 }}"
+    group: "{{ item.1.stdout }}"
+  loop: "{{ usernames | zip(primary_group.results) | list }}"  # NOTE: One of the possible way to join two lists and iterate through it zip
+  tags: [user]
+
+- name: Add groups
+  ansible.builtin.group:
+    name: "{{ group }}"
+    state: present
+  tags: [user]
+  loop: ["{{ users_group }}", "{{ juno_local_group }}"]
+  loop_control:
+    loop_var: group
+
+- name: Add user to sshers
+  ansible.builtin.user:
+    name: "{{ user }}"
+    append: yes
+    groups: "{{ users_group }}"
+  loop: "{{ usernames }}"
+  loop_control:
+    <<: *loop_control_cfg
+  tags: [user]
+

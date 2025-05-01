@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  server:
+    image: example-ssh:v00
+    container_name: server-compose
+    ports:
+      - "9922:22"
+    build:
+      context: .
+      dockerfile: Dockerfile

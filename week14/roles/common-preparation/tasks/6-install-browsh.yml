@@ -1,0 +1,8 @@
+---
+- name: Install brow.sh
+  ansible.builtin.apt:
+    state: present
+    deb: https://github.com/browsh-org/browsh/releases/download/v1.8.0/browsh_1.8.0_linux_amd64.deb
+  tags: [common, browsh]
+
+

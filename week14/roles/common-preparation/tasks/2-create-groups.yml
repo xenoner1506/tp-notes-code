@@ -1,0 +1,13 @@
+---
+- name: Add juno_local group
+  ansible.builtin.group:
+    name: juno_local
+    state: present
+  tags: [common, group]
+
+- name: Add user_group
+  ansible.builtin.group:
+    name: "{{ users_group }}"
+    state: present
+  tags: [common, group]
+

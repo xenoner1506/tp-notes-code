@@ -1,0 +1,26 @@
+---
+- name: Download Neovim
+  ansible.builtin.git:
+    repo: https://github.com/neovim/neovim.git
+    dest: "{{ common_soft_directory }}/neovim"
+    version: v0.10.1
+    force: true
+    depth: 1
+  tags: [common, neovim]
+
+- name: build and install Neovim
+  ansible.builtin.make:
+    chdir: "{{ common_soft_directory }}/neovim"
+    target: install
+    params:
+      CMAKE_BUILD_TYPE: RelWithDebInfo
+      --jobs: "{{ cpus }}"
+  tags: [common, neovim]
+
+- name: copy Neovim to /usr/local/bin/
+  ansible.builtin.copy:
+    src: "{{ common_soft_directory }}/neovim/build/bin/nvim"
+    dest: /usr/local/bin/
+    remote_src: true
+  tags: [common, neovim]
+

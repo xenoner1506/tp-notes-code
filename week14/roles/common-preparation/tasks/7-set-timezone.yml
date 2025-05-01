@@ -1,0 +1,6 @@
+---
+- name: Set timezone to Europe/Moscow
+  become: true
+  community.general.timezone:
+    name: Europe/London
+  tags: [common, timezone]

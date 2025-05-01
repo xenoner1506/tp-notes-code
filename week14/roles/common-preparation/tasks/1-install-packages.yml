@@ -1,0 +1,36 @@
+---
+- name: Install common soft (1st stage)
+  ansible.builtin.apt:
+    state: present
+    name: 
+      - git
+      - tree
+      - tcsh
+      - fish
+      - rsync
+      - make
+      - cmake
+      - gcc
+      - g++
+      - curl
+      - wget
+      - python3
+      - python3-pip
+      - python3-dev
+    update_cache: true
+  tags: [common, packages]
+
+- name: Install common soft (2nd stage)
+  ansible.builtin.apt:
+    state: present
+    name:
+      - htop
+      - nano
+      - byobu
+      - parallel
+      - ripgrep
+      - mosh
+      - npm
+    update_cache: true
+  tags: [common, packages]
+

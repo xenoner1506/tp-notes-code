@@ -1,0 +1,17 @@
+---
+- import_tasks: 0-create-dirs.yml
+
+- import_tasks: 1-install-packages.yml
+
+- import_tasks: 2-create-groups.yml
+
+- import_tasks: 3-install-direnv.yml
+
+# - import_tasks: 4-install-neovim.yml
+
+# - import_tasks: 5-install-lazygit.yml
+
+- import_tasks: 6-install-browsh.yml
+
+# - import_tasks: 7-set-timezone.yml
+

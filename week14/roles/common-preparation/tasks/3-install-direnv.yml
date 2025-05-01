@@ -1,0 +1,19 @@
+---
+- name: Download install-direnv.sh for direnv
+  ansible.builtin.uri:
+    url: https://direnv.net/install.sh
+    dest: /common_soft/install-direnv.sh
+    force: true
+  tags: [common, direnv]
+
+- name: Change access to install-direnv.sh
+  ansible.builtin.file: 
+    dest: /common_soft/install-direnv.sh
+    owner: root
+    mode: 0755
+  tags: [common, direnv]
+
+- name: Install direnv
+  ansible.builtin.command: bash /common_soft/install-direnv.sh --bin_path=/usr/local/bin
+  tags: [common, direnv]
+
