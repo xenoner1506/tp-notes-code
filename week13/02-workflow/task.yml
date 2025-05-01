@@ -22,5 +22,5 @@ test-job:
 
 workflow:
   rules:
-    - if: $CI_COMMIT_BRANCH != master # More variables [there](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html)
-      when: manual # always/never
+    - if: $CI_COMMIT_BRANCH != "main"  # More variables [there](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html)
+      when: never
